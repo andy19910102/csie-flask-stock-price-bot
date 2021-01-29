@@ -6,7 +6,9 @@ from pyquery import PyQuery as pq
 def get_stock_info(sid):
     # 函數回應
     data = {
+        # 是否取得資料成功
         'is_success': False,
+        # 個股狀況報告
         'report': ''
     }
     try:

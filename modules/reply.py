@@ -1,8 +1,7 @@
 from linebot.models import (
-    MessageEvent, TextMessage, StickerMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, LocationSendMessage, TemplateSendMessage, ButtonsTemplate, PostbackAction, MessageAction, URIAction, CarouselTemplate, CarouselColumn
+    MessageEvent, TextMessage, StickerMessage, TextSendMessage, ImageSendMessage, StickerSendMessage, LocationSendMessage, TemplateSendMessage, ButtonsTemplate, PostbackAction, MessageAction, URIAction, CarouselTemplate, CarouselColumn, QuickReply, QuickReplyButton
 )
-
-# 官方文件
+# LINE所支援的回覆格式可參考官方文件內的 Message Object章節
 # https://github.com/line/line-bot-sdk-python
 
 
@@ -15,7 +14,17 @@ faq = {
         original_content_url='https://picsum.photos/id/1040/900/400',
         preview_image_url='https://picsum.photos/id/1040/900/400'
     ),
-    '電話': TextSendMessage(text='0912-345-678')
+    '電話': TextSendMessage(text='0912-345-678'),
+    '交通': TextSendMessage(text='請問您想使用何種方式前往？',
+                          quick_reply=QuickReply(items=[
+                              QuickReplyButton(action=MessageAction(
+                                  label="搭乘捷運", text="捷運")
+                              ),
+                              QuickReplyButton(action=MessageAction(
+                                  label="搭乘公車", text="公車")
+                              )
+                          ])
+                          ),
 }
 
 # 主選單

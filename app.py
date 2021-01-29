@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # 運行以下程式需安裝模組: line-bot-sdk, flask, pyquery, firebase-admin
 
 # 引入flask模組
@@ -34,9 +33,8 @@ app = Flask(__name__)
 CHANNEL_ACCESS_TOKEN = '替換成BOT的CHANNEL_ACCESS_TOKEN'
 CHANNEL_SECRET = '替換成BOT的CHANNEL_SECRET'
 
-# ================== 以下為 X-LINE-SIGNATURE 驗證程序 ==================
+# *********** 以下為 X-LINE-SIGNATURE 驗證程序 ***********
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
-# 產生handler實例
 handler = WebhookHandler(CHANNEL_SECRET)
 
 
@@ -57,10 +55,10 @@ def callback():
         abort(400)
 
     return 'OK'
-# ================== 以上為 X-LINE-SIGNATURE 驗證程序 ==================
+# *********** 以上為 X-LINE-SIGNATURE 驗證程序 ***********
 
 
-# ========== 文字訊息傳入時的處理器 ==========
+# 文字訊息傳入時的處理器
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     # 當有文字訊息傳入時
@@ -68,10 +66,8 @@ def handle_message(event):
     print('*'*40)
     print('[使用者傳入文字訊息]')
     print(str(event))
-    # 使用者的回應
+    # 使用者說的文字
     user_msg = event.message.text
-    # TODO: 取得使用者資料
-    # TODO: 記錄使用者傳過的內容
     # 準備要回傳的文字訊息
     reply = TextSendMessage(text=f'Hi你剛才說的是，「{user_msg}」對吧')
 
@@ -81,7 +77,7 @@ def handle_message(event):
         reply)
 
 
-# ========== 貼圖訊息傳入時的處理器 ==========
+# 貼圖訊息傳入時的處理器
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
     # 當有貼圖訊息傳入時

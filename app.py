@@ -20,8 +20,6 @@ from linebot.models import (
 from modules.stock import get_stock_info
 # 引用常用回應與主選單
 from modules.reply import faq, menu
-# 引用Firebase Admin
-from firebase_admin import db
 # 引用時間模組
 import time
 
